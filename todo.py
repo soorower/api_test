@@ -14,7 +14,7 @@ todos = [
   {
     "id": 3,
     "item": "Publish",
-    "status": "Open"
+    "status": "Oppppppppppppppen"
   }
 ]
 
