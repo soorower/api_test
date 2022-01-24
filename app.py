@@ -11,5 +11,5 @@ def home():
   r = requests.get(arg)
   soup = bs(r.content,'html.parser')
   # Product_name = str(soup)[10:29]
-  
-  return soup
+  sou = str(soup)
+  return sou
