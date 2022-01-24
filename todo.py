@@ -4,12 +4,12 @@ todos = [
   {
     "id": 1,
     "item": "Create sample app",
-    "status": "Completed"
+    "status": "Completed sorower"
   },
   {
     "id": 2,
     "item": "Deploy in Heroku",
-    "status": "Open"
+    "status": "Open soorwer"
   },
   {
     "id": 3,
