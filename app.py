@@ -1,12 +1,9 @@
-from flask import Flask
-from flask_restful import Api
+from urllib import request
+import flask
+app = flask.Flask(__name__)
 
-from .todo import Todo
+@app.route('/',methods = ['GET'])
 
-app = Flask(__name__)
-api = Api(app)
-
-api.add_resource(Todo, "/todo/<int:id>")
-
-if __name__ == "__main__":
-  app.run()
+def home():
+  arg = request.args['arg']
+  return 'Hello World'
