@@ -1,4 +1,4 @@
-from urllib import request
+from flask import request
 import flask
 app = flask.Flask(__name__)
 
