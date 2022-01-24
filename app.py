@@ -10,6 +10,6 @@ def home():
   arg = request.args['arg']
   r = requests.get(arg)
   soup = bs(r.content,'html.parser')
-  Product_name = str(soup)[10:29]
+  # Product_name = str(soup)[10:29]
   
-  return Product_name
+  return soup
