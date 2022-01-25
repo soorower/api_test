@@ -40,26 +40,39 @@ def home():
 
 
     if '"title":' in str(soup)[:50]:
+        try:
+            data = json.loads(str(soup))
+            product_name= data.get('title')
+            price = data.get('buybox').get('prices')[0]
+            stock = data.get('stock_availability').get('status')
 
-      data = json.loads(str(soup))
-      product_name= data.get('title')
-      price = data.get('buybox').get('prices')[0]
-      stock = data.get('stock_availability').get('status')
+            images = []
+            if type(data.get('gallery').get('images'))==list:
+                for i in data.get('gallery').get('images'):
+                    images.append(i.replace('{size}','zoom'))
+            else:
+                images = data.get('gallery').get('images')
+        except:
+            strsoup = str(soup)
+            product_name = strsoup[10:100].split('"')[1]
+            price_num = strsoup.find('"prices": ')
+            price = strsoup[price_num:price_num+25].split('[')[1].split(']')[0]
+            
+            stock_num = strsoup.find('"stock_availability": {"status": "')
+            stock = strsoup[stock_num:stock_num+60].split('"')[5]
+            
+            images = []
+            img_num = strsoup.find('"gallery": {"images": ["')
+            img = strsoup[img_num:img_num+150].split(',')[0].split('"')[-2].replace('{size}','zoom')
+            images.append(img)
+        data_set = {
+            'Product Name': product_name,
+            'Price': price,
+            'Stock Availability': stock,
+            'Images': images
+        }
 
-      images = []
-      if type(data.get('gallery').get('images'))==list:
-          for i in data.get('gallery').get('images'):
-              images.append(i.replace('{size}','zoom'))
-      else:
-          images = data.get('gallery').get('images')
-      data_set = {
-          'Product Name': product_name,
-          'Price': price,
-          'Stock Availability': stock,
-          'Images': images
-      }
-
-      jsons = json.dumps(data_set)
+        jsons = json.dumps(data_set)
     else:
         data_set = {
             'Error': 'Something Went Wrong, try after some seconds'
